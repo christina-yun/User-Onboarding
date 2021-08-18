@@ -1,23 +1,50 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
+//displays the form
+import Form from './Form';
+//displays the submitted results from Form
+import SubmittedForm from './SubmittedForm';
 import './App.css';
 
+//Making these starting states globally accessible
+const initialFormValues = {
+  name:'',
+  email: '',
+  password: '',
+  tos: false
+}
+
+const initialFormErrors = {
+  name: '',
+  email: '',
+  password: '',
+  tos: ''
+}
+
+const initialUserList = [];
+
+const initialDisabled = true;
+
 function App() {
+  //set up states for: form values, form errors (when users do things wrong/don't follow directions), pushing/displaying newly-created users into the initialUserList array, disabling the submit button
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+
+  const [user, setUser] = useState(initialUserList);
+
+  const [disabled, setDisabled] = useState(initialDisabled);
+
+  
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form 
+      values={formValues} 
+      disabled={disabled}
+      errors={formErrors}
+      />
     </div>
   );
 }
