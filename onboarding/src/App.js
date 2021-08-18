@@ -55,6 +55,7 @@ function App() {
     axios.post('https://reqres.in/api/users', newUser)
     .then(response => {
       console.log('i am response', response.data)
+      setUsers([response.data, ...users])
     })
     .catch(err => {
       console.error(err);
@@ -108,6 +109,13 @@ function App() {
       submit={formSubmit}
       change={inputChange}
       />
+      {users.map(user => {
+        return(
+        <SubmittedForm key={user.id} details={user}/>
+        )
+      })
+    }
+    
     </div>
   );
 }
